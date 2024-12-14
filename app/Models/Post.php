@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Post extends Model
 {
-    protected $fillable = ['text', 'image_path'];
+    protected $fillable = ['text', 'image_path', 'post_id'];
 
     public function user(): BelongsTo
     {
@@ -16,9 +16,9 @@ class Post extends Model
     }
 
 
-    public function repliedTo(): HasMany
+    public function repliedTo(): HasOne
     {
-        return $this->hasMany(Post::class);
+        return $this->hasOne(Post::class);
     }
 
 }
