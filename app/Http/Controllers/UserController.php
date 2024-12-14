@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -26,15 +27,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $attriburtes = $request->validate([
-            'username' => 'required',
-            'password' => ['required', Password::min(5)],
-            'name' => 'required',
-        ]);
+        try {
+            $attriburtes = $request->validate([
+                'username' => 'required',
+                'password' => ['required', Password::min(5)],
+                'name' => 'required',
+            ]);
+        } catch (ValidationException $th) {
+            return response($th->getMessage());
+        }
 
         $user = User::create($attriburtes);
+        dd($user);
 
         Auth::login($user);
+        return response('logged in');;
     }
 
     /**

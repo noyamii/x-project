@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username');
-            $table->string('role');
+            $table->string('role')->default('normal_user');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
