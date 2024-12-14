@@ -16,10 +16,10 @@ class PostController extends Controller
         $request->validate([
             'image' => 'nullable|mimes:jpg,png,jpeg|max:10240',
             'text' => 'nullable',
+            'tags' => 'nullable',
         ]);
 
-        // if both is empty
-        if ($request->image or $request->text){
+        if (!($request->image or $request->text)){
             return response('image or text required', 400);
         }
 
@@ -30,10 +30,17 @@ class PostController extends Controller
             $imagePath = 'image/' . $imageName;
         }
 
-        Auth::user()->post()->create([
+        $post = Auth::user()->post()->create([
                         'text' => $request->text,
                         'image_path' => $imagePath,
                     ]);
+
+
+        if ($request['tags'] ?? false) {
+            foreach (explode(',', $request['tags']) as $tag) {
+                $post->tag($tag);
+            }
+        }
 
         return response('post created');
 

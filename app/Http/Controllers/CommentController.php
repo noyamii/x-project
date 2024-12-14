@@ -6,7 +6,6 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use function PHPSTORM_META\type;
 
 class CommentController extends Controller
 {
@@ -28,8 +27,7 @@ class CommentController extends Controller
             'text' => 'nullable',
         ]);
 
-        // if both is empty
-        if ($request->image or $request->text){
+        if (!($request->image or $request->text)){
             return response('image or text required', 400);
         }
 
@@ -45,6 +43,12 @@ class CommentController extends Controller
                         'image_path'    => $imagePath,
                         'post_id'       => $id
                     ]);
+
+        if ($request['tags'] ?? false) {
+            foreach (explode(',', $request['tags']) as $tag) {
+                $post->tag($tag);
+            }
+        }
 
         return response('comment sent.');
     }
