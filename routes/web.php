@@ -9,6 +9,7 @@ Route::get('/', function () {
 });
 
 Route::post('/post', [PostController::class, 'store']);
+Route::get('/post', [PostController::class, 'index']);
 
 Route::post('/user', [UserController::class, 'store']);
 Route::get('/test', [UserController::class, 'test']);

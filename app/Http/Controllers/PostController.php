@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function index () {
+        return Post::inRandomOrder()->get();
+    }
 
     public function store (Request $request) {
         $request->validate([
@@ -22,9 +25,9 @@ class PostController extends Controller
 
         $imagePath = null;
         if ($request->image){
-            $imagePath = time() . $request->file('image')->getClientOriginalName();
-            $request->image->move(public_path('images'), $imagePath);
-            $imagePath = 'image/' . $imagePath;
+            $imageName = time() . $request->file('image')->getClientOriginalName();
+            $request->image->move(public_path('images'), $imageName);
+            $imagePath = 'image/' . $imageName;
         }
 
         Auth::user()->post()->create([
