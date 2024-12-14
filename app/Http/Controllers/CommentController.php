@@ -38,7 +38,7 @@ class CommentController extends Controller
             $imagePath = 'image/' . $imageName;
         }
 
-        Auth::user()->post()->create([
+        $post = Auth::user()->post()->create([
                         'text'          => $request->text,
                         'image_path'    => $imagePath,
                         'post_id'       => $id
