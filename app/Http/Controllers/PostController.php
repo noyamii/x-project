@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -19,20 +20,19 @@ class PostController extends Controller
             return response('image or text required', 400);
         }
 
-        $imagePath = '';
+        $imagePath = null;
         if ($request->image){
             $imagePath = time() . $request->file('image')->getClientOriginalName();
             $request->image->move(public_path('images'), $imagePath);
             $imagePath = 'image/' . $imagePath;
         }
 
+        Auth::user()->post()->create([
+                        'text' => $request->text,
+                        'image_path' => $imagePath,
+                    ]);
 
-        Post::create([
-            'text' => $request->text,
-            'image_path' => $imagePath,
-        ]);
-
-        return view('post');
+        return response('post created');
 
     }
 }

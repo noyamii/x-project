@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->text('text')->nullable();
             $table->string('image_path')->nullable();
-            $table->foreignId(Post::class)->nullable();
+            $table->foreignIdFor(Post::class)->nullable();
+            $table->foreignIdFor(User::class);
             $table->timestamps();
         });
 

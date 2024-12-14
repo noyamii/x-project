@@ -38,8 +38,6 @@ class UserController extends Controller
         }
 
         $user = User::create($attriburtes);
-        dd($user);
-
         Auth::login($user);
         return response('logged in');;
     }
