@@ -29,7 +29,7 @@ class CommentController extends Controller
         ]);
 
         // if both is empty
-        if (($request->image or $request->text) == null){
+        if ($request->image or $request->text){
             return response('image or text required', 400);
         }
 
@@ -52,9 +52,9 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(int $id)
     {
-        
+        Post::find($id);
     }
 
     /**

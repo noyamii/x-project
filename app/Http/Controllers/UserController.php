@@ -13,10 +13,6 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function test(Request $request)
-    {
-        return response($request->cookie());
-    }
     public function index()
     {
 

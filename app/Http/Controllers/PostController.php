@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     public function index () {
-        return Post::inRandomOrder()->get();
+        return Post::inRandomOrder()->limit(10)->get();
     }
 
     public function store (Request $request) {
@@ -19,7 +19,7 @@ class PostController extends Controller
         ]);
 
         // if both is empty
-        if (($request->image or $request->text) == null){
+        if ($request->image or $request->text){
             return response('image or text required', 400);
         }
 
@@ -37,5 +37,8 @@ class PostController extends Controller
 
         return response('post created');
 
+    }
+    public function show (int $id) {
+        
     }
 }
