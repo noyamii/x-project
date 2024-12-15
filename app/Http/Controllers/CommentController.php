@@ -72,8 +72,12 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(string $id)
     {
-        //
+        if ((Auth::user()->role == 'admin') or (Auth::user()->id == Post::find($id)->user_id)){
+            Post::destroy($id);
+            return response('deleted');
+        }
+        return response('not allowed', 403);
     }
 }

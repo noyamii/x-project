@@ -43,7 +43,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+
+        return User::findOrFail($id);
     }
 
     /**
@@ -57,8 +58,13 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        // user might be null
+        // user not allowed 
+        // couldn't find the desired user
+        if ((Auth::user()->role == 'admin') or (Auth::user()->id == $id)) {
+            dd(User::destroy($id));
+        }
     }
 }

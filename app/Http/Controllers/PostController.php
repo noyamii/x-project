@@ -45,7 +45,14 @@ class PostController extends Controller
         return response('post created');
 
     }
-    public function show (int $id) {
-        
+    public function destroy (int $id) {
+        // user role might be null
+        // user not allowed 
+        // couldn't find the desired user
+        if (Auth::user()) {
+            if ((Auth::user()->role == 'admin') or (Auth::user()->id == Post::find($id)->user_id)){
+                Post::destroy($id);
+            }
+        }
     }
 }
