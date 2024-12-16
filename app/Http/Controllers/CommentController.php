@@ -25,6 +25,7 @@ class CommentController extends Controller
         $request->validate([
             'image' => 'nullable|mimes:jpg,png,jpeg|max:10240',
             'text' => 'nullable',
+            'tags' => 'nullable',
         ]);
 
         if (!($request->image or $request->text)){

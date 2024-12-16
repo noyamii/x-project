@@ -23,15 +23,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $attriburtes = $request->validate([
-                'username' => 'required',
-                'password' => ['required', Password::min(5)],
-                'name' => 'required',
-            ]);
-        } catch (ValidationException $th) {
-            return response($th->getMessage());
-        }
+        $attriburtes = $request->validate([
+            'username' => 'required',
+            'password' => ['required', Password::min(5)],
+            'name' => 'required',
+        ]);
 
         $user = User::create($attriburtes);
         Auth::login($user);

@@ -1,0 +1,22 @@
+POST /signup HTTP/1.1
+Accept:             */*
+Accept-Encoding:    gzip, deflate, br, zstd
+Accept-Language:    en-US,en;q=0.9,fa;q=0.8,de;q=0.7
+Connection:         keep-alive
+Content-Length:     33
+Content-Type:       application/x-www-form-urlencoded; charset=UTF-8
+Cookie:             XSRF-TOKEN=eyJpdiI6IkF2bmJtSE5BdnBlZGJ3OFNSYWtaaGc9PSIsInZhbHVlIjoiQVBDazRKMzhMS2FNcVdhRWlhcXV1T2NNbDN2dVVKRUY2S0piWUt1dnFIcWZhZGUrZ1NZY3lMbmhhS3IyU0x4aEU0ZXNDOTMxOGRiUXlvT1BuT3liQ3FyOUFZMG1VdUZYcUd0MnoxZm5RYkdOU1FBWmtteENDUTZTUVJOYkJMSnoiLCJtYWMiOiI1NjY0YjA5MWIyZWI3ZjMzOGU5ODM1OWM0ODkwMTFiNWQ4YmNkZGNhYWIyM2ZjMGJhMmM2YjZjOGVlZDJkZWVkIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6Imk3ZnBPSytabUQ2WU9zaEhVQW5BT1E9PSIsInZhbHVlIjoielNCQis2aXlyRUNIMjc4MEpQb0YxMHNUcU02bloxRk1oQU93UkJoUGRTdnkzVVVHTWlmMEQwSTFqNGl4MnlJTVJwWWJtVHU2Y1lXeFN0UVJpS29VQ0dFVlpRYjJxTmJpZU4rS3RhdHRzZkIzRSt6cERJSGl3Q1cyaDIzb05DcWgiLCJtYWMiOiJhYTFlNTU3YzNlMjUyNjI4ZGZlZDIwZDZhOTA5ZTg5Yjg4YzA0OWZiNTQ2OGEwZWEzMTE5NmI1NzAwNWI4YjA1IiwidGFnIjoiIn0%3D
+Host:               localhost:8000
+Origin:             http://localhost:8000
+Referer:            http://localhost:8000/signup?
+Sec-Ch-Ua:          "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+Sec-Ch-Ua-Mobile:   ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest:     empty
+Sec-Fetch-Mode:     cors
+Sec-Fetch-Site:     same-origin
+User-Agent:         Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+X-Requested-With:   XMLHttpRequest
+Cookie: XSRF-TOKEN=JzeoHJTqCNwRSYzNDbQKrAAPDH8nfSm1pmJ8pYo4; laravel_session=VDKaqTIuaCYDcnm2Bud0QWWrtCwGw9ss2EZjnpUG
+
+name=fghj&username=fghj&password=

@@ -24,9 +24,13 @@ Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->middlewar
 Route::get('/tag', [TagController::class, 'index']);
 Route::delete('/tag/{name}', [TagController::class, 'destroy'])->middleware('auth');
 
-Route::post('/signup', [UserController::class, 'store'])->middleware('auth');
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware('auth');
 Route::get('/user/{id}', [UserController::class, 'show']);
+Route::middleware('guest')->group(function () {
+Route::view('/signup', 'auth.signup');
+Route::post('/signup', [UserController::class, 'store']);
 
 Route::post('/login', [SessionController::class, 'store']);
+Route::view('/login', 'auth.login');
+});
 Route::delete('/logout', [SessionController::class, 'destroy'])->middleware('auth');

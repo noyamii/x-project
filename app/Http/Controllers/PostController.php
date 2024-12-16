@@ -49,10 +49,8 @@ class PostController extends Controller
         // user role might be null
         // user not allowed 
         // couldn't find the desired user
-        if (Auth::user()) {
-            if ((Auth::user()->role == 'admin') or (Auth::user()->id == Post::find($id)->user_id)){
-                Post::destroy($id);
-            }
+        if ((Auth::user()->role == 'admin') or (Auth::user()->id == Post::find($id)->user_id)){
+            Post::destroy($id);
         }
     }
 }
