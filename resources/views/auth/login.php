@@ -25,11 +25,6 @@
                 alert(response.responseJSON['message']);
               },
             },
-            success:function(data) {
-            if(data) {   // DO SOMETHING     
-              console.log(data);
-            } else {  }
-          }
             
         });
       });

@@ -13,7 +13,6 @@
         $.ajax({
             url: '/signup',
             method: 'post',
-            dataType: 'json',
             data: {
               name: $("#name").val(),
               username: $("#username").val(),
@@ -26,11 +25,6 @@
               422: function (response) {
                 alert(response.responseJSON['message']);
               },
-            },
-            error:function(data) {
-            if(data) {   // DO SOMETHING     
-                console.log(data);
-            } else {}
             },
         });
       });

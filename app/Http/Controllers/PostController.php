@@ -9,7 +9,25 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     public function index () {
-        return Post::inRandomOrder()->limit(10)->get();
+        $posts = Post::inRandomOrder()->limit(10)->with('user', 'tags')->get();
+        $response = [];
+        foreach ($posts as $post){ 
+            $array['id'] = $post->id;
+            $array['text'] = $post->text;
+            if ($post->tags) {
+                foreach ($post->tags as $tag) {
+                    $array['tags'][] = $tag->name;
+                }
+            }
+            $array['replied_to'] = $post->post_id;
+            $array['image_path'] = $post->image_path;
+            $array['user_id'] = $post->user_id;
+            $array['user_name'] = $post->user->name;
+            $response[] = $array;
+        }
+        
+        return $response;
+
     }
 
     public function store (Request $request) {

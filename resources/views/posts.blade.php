@@ -7,6 +7,47 @@
   <title>Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $.ajax({
+        type: "get",
+        url: "/post",
+        success: function (response) {
+          response.forEach(function (item) {
+            var name = document.createElement("span");  
+            name.innerHTML = item['user_name'];
+            name.setAttribute('class', 'text-sm font-semibold text-gray-400 ');
+
+            var divName = document.createElement("div");  
+            divName.appendChild(name);
+            divName.setAttribute('class', 'flex items-center space-x-2 rtl:space-x-reverse');
+            divName.addEventListener('click', function () {
+              location.href = "/user/" + item['user_id'];
+            });
+
+            var text = document.createElement("p");
+            text.innerHTML = item['text'];
+            text.setAttribute('class', 'text-sm font-normal py-2.5 text-gray-900 dark:text-white');
+
+            var div = document.createElement("div");
+            div.setAttribute('class', 'flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700 mt-2');
+            div.appendChild(divName);
+            div.appendChild(text);
+
+            document.getElementById('postBody').appendChild(div);
+            
+        });
+          
+        },
+        error: function (response) {
+          alert('something bad happend');
+          console.log(response);
+          
+        }
+        
+      });
+    });
+  </script>
 
 </head>
 
@@ -41,7 +82,7 @@
         <div class="hidden sm:ml-2 sm:block">
           <div class="flex">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-299 hover:bg-gray-700 hover:text-white" -->
-            <a href="/posts" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Posts</a>
+            <a href="/post" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Posts</a>
           </div>
         </div>
       </div>
@@ -70,6 +111,12 @@
   </div>
 
 </nav>
+
+<div>
+<div id="postBody"></div>
+</div>
+
+</div>
 
 </body>
 
