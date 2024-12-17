@@ -26,7 +26,12 @@
               422: function (response) {
                 alert(response.responseJSON['message']);
               },
-            }
+            },
+            error:function(data) {
+            if(data) {   // DO SOMETHING     
+                console.log(data);
+            } else {}
+            },
         });
       });
     })

@@ -70,13 +70,25 @@
         </div>
       </div>
 
-        <!-- Profile dropdown -->
+        @guest
         <div class="relative ml-3">
           <div>
             <a href="/login" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
             <a href="/signup" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Signup</a>
           </div>
         </div>
+        @endguest
+        @auth
+        <div class="relative ml-3">
+          <div >
+            <form action="/logout" method="POST">
+              @method("delete")
+              <button class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Logout</button>
+              <a href="/user/{{Auth::user()->id}}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">profile</a>
+            </form>
+          </div>
+        </div>
+        @endauth
       </div>
     </div>
   </div>

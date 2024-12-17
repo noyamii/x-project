@@ -13,7 +13,6 @@
         $.ajax({
             url: '/login',
             method: 'post',
-            dataType: 'json',
             data: {
               username: $("#username").val(),
               password: $("#password").val(),
@@ -25,7 +24,12 @@
               422: function (response) {
                 alert(response.responseJSON['message']);
               },
-            }
+            },
+            success:function(data) {
+            if(data) {   // DO SOMETHING     
+              console.log(data);
+            } else {  }
+          }
             
         });
       });
