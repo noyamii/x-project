@@ -11,9 +11,6 @@ class TagController extends Controller
         Tag::all('name');
     }
     public function destroy (string $name) {
-        // user role might be null
-        // user not allowed 
-        // couldn't find the desired tag
         if (Auth::user()->role == 'admin') {
             Tag::where('name', strtolower($name))->delete();
         }

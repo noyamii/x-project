@@ -36,3 +36,5 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::delete('/logout', [SessionController::class, 'destroy'])->middleware('auth');
+
+Route::get('/role', [UserController::class, 'dischargeRole']);

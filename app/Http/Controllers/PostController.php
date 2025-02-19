@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use http\Exception\BadMessageException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +12,7 @@ class PostController extends Controller
     public function index () {
         $posts = Post::inRandomOrder()->limit(10)->with('user', 'tags')->get();
         $response = [];
-        foreach ($posts as $post){ 
+        foreach ($posts as $post){
             $array['id'] = $post->id;
             $array['text'] = $post->text;
             if ($post->tags) {
@@ -19,13 +20,20 @@ class PostController extends Controller
                     $array['tags'][] = $tag->name;
                 }
             }
-            $array['replied_to'] = $post->post_id;
-            $array['image_path'] = $post->image_path;
+
+            // replied to someone else?
+            if ($post->post_id) {
+                $array['replied_to'] = $post->post_id;
+            }
+
+            if ($post->image_path) {
+                $array['image_url'] = $post->image_path;
+            }
             $array['user_id'] = $post->user_id;
             $array['user_name'] = $post->user->name;
             $response[] = $array;
         }
-        
+
         return $response;
 
     }
@@ -43,7 +51,7 @@ class PostController extends Controller
 
         $imagePath = null;
         if ($request->image){
-            $imageName = time() . $request->file('image')->getClientOriginalName();
+            $imageName = time() . "-" . $request->file('image')->getClientOriginalName();
             $request->image->move(public_path('images'), $imageName);
             $imagePath = 'image/' . $imageName;
         }
@@ -64,9 +72,6 @@ class PostController extends Controller
 
     }
     public function destroy (int $id) {
-        // user role might be null
-        // user not allowed 
-        // couldn't find the desired user
         if ((Auth::user()->role == 'admin') or (Auth::user()->id == Post::find($id)->user_id)){
             Post::destroy($id);
         }
